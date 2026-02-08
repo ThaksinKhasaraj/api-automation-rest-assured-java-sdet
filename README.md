@@ -26,17 +26,7 @@ api-automation-rest-assured-java-sdet
 
 Location:
 src/test/resources/features/login.feature
-
-Scenarios:
-
-@TC-POST-01  
-Successful login using POST
-
-@TC-POST-GET-02  
-Successful login and retrieve users using POST and GET
-
-@TC-MATCH-USER-03  
-Login, retrieve users, chaining response, and JSON schema validation
+![TC](tc.png)
 
 ---
 
