@@ -1,0 +1,1 @@
+{"uuid":"cc493672-0a07-4c31-9471-831134613c6f","name":"Scenario: Successful login POST","children":["8966c3e5-8e00-484e-9c52-458984aad01e"],"befores":[{"name":"hooks.Hooks.setup()","status":"passed","stage":"finished","steps":[],"attachments":[],"parameters":[],"start":1770549239335,"stop":1770549240796}],"afters":[],"start":1770549239331,"stop":1770549250437}

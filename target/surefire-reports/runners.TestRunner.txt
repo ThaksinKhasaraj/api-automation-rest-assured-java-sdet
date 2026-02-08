@@ -1,0 +1,22 @@
+-------------------------------------------------------------------------------
+Test set: runners.TestRunner
+-------------------------------------------------------------------------------
+Tests run: 3, Failures: 2, Errors: 0, Skipped: 0, Time elapsed: 26.50 s <<< FAILURE! -- in runners.TestRunner
+Login and Get Users API.Successful login and retrieve users PORT and GET -- Time elapsed: 9.389 s <<< FAILURE!
+java.lang.AssertionError: expected:<200> but was:<403>
+	at org.junit.Assert.fail(Assert.java:89)
+	at org.junit.Assert.failNotEquals(Assert.java:835)
+	at org.junit.Assert.assertEquals(Assert.java:647)
+	at org.junit.Assert.assertEquals(Assert.java:633)
+	at definitions.LoginDefinitions.status_is(LoginDefinitions.java:53)
+	at ✽.status is 200(file:///Users/thaksinkhasaraj/api-automation-rest-assured-java-sdet/src/test/resources/features/login.feature:13)
+
+Login and Get Users API.Login and get users with chaining and schema validation -- Time elapsed: 4.566 s <<< FAILURE!
+java.lang.AssertionError: expected:<200> but was:<403>
+	at org.junit.Assert.fail(Assert.java:89)
+	at org.junit.Assert.failNotEquals(Assert.java:835)
+	at org.junit.Assert.assertEquals(Assert.java:647)
+	at org.junit.Assert.assertEquals(Assert.java:633)
+	at definitions.LoginDefinitions.status_is(LoginDefinitions.java:53)
+	at ✽.status is 200(file:///Users/thaksinkhasaraj/api-automation-rest-assured-java-sdet/src/test/resources/features/login.feature:19)
+

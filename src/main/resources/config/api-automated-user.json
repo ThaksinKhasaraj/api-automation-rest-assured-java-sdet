@@ -1,0 +1,10 @@
+{
+  "api": {
+    "apiKey": "reqres_977b55793e6f42779ec49b9016eadcff",
+    "baseUrl": "https://reqres.in/api"
+  },
+  "login": {
+    "email": "eve.holt@reqres.in",
+    "password": "cityslicka"
+  }
+}

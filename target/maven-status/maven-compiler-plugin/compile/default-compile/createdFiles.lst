@@ -1,0 +1,8 @@
+model/UserListResponse.class
+context/TestContext.class
+model/LoginRequest.class
+util/ConfigLoader.class
+context/AuthContext.class
+client/AuthClient.class
+client/UserClient.class
+model/LoginResponse.class
