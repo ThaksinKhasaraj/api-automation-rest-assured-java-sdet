@@ -1,11 +1,12 @@
-# API Automation Testing – Rest Assured + Cucumber + Allure
+# API Automation Testing Project
 
-This project is an API automation testing framework built with **Java**, **Rest Assured**, **Cucumber (BDD)**, **JUnit**, and **Allure Report**.  
-It is designed to test REST APIs with readable Gherkin scenarios and generate rich test reports.
+API automation testing project built with Java, Rest Assured, Cucumber (BDD), JUnit, and Allure Report.
+
+This project demonstrates login, API chaining (POST + GET), status validation, and JSON schema validation with readable Gherkin scenarios and reporting via Allure.
 
 ---
 
-## 🛠 Tech Stack
+## Tech Stack
 
 - Java 11+
 - Maven
@@ -16,25 +17,80 @@ It is designed to test REST APIs with readable Gherkin scenarios and generate ri
 
 ---
 
-## 📁 Project Structure
+## Project Structure
 
-# API Automation Testing – Rest Assured + Cucumber + Allure
+api-automation-rest-assured-java-sdet
+![Project Structure](img.png)
 
-This project is an API automation testing framework built with **Java**, **Rest Assured**, **Cucumber (BDD)**, **JUnit**, and **Allure Report**.  
-It is designed to test REST APIs with readable Gherkin scenarios and generate rich test reports.
+## Test Scenarios
+
+Location:
+src/test/resources/features/login.feature
+
+Scenarios:
+
+@TC-POST-01  
+Successful login using POST
+
+@TC-POST-GET-02  
+Successful login and retrieve users using POST and GET
+
+@TC-MATCH-USER-03  
+Login, retrieve users, chaining response, and JSON schema validation
 
 ---
 
-## 🛠 Tech Stack
+## Run Tests
 
-- Java 11+
-- Maven
-- Rest Assured
-- Cucumber
-- JUnit
-- Allure Report
+Run tests and remove old results:
+
+mvn clean test
 
 ---
 
-## 📁 Project Structure
+## Allure Report
+
+Generate report (latest run only):
+
+allure generate target/allure-results --clean -o target/allure-report
+
+Open report:
+
+allure open target/allure-report
+
+---
+
+## Common Issues
+
+Allure report shows 0 test cases or UNKNOWN
+- Tests did not run successfully
+- Allure plugin not configured correctly
+- Cucumber runner missing Allure plugin
+
+403 Forbidden error
+- Authorization token missing or expired
+- Authorization header not passed to GET request
+- Login request failed but test continued
+
+Make sure Authorization header is set correctly when calling protected APIs.
+
+---
+
+## Test Runner Configuration
+
+Cucumber runner uses Allure plugin:
+
+- pretty
+- io.qameta.allure.cucumberjunit.AllureCucumberJUnit
+
+---
+
+## Reports Location
+
+- Test execution results: target/surefire-reports
+- Allure raw results: target/allure-results
+- Allure HTML report: target/allure-report
+
+---
+
 

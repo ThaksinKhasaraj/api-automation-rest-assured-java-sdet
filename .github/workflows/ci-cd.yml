@@ -1,32 +1,97 @@
 name: API Automation Tests
 
 on:
-  push:
-    branches: [ "develop" ]
-  pull_request:
+  workflow_dispatch:
+    inputs:
+      environment:
+        description: 'Select environment to run tests'
+        required: true
+        default: qa
+        type: choice
+        options:
+          - dev
+          - qa
+
+      email_to:
+        description: 'Email recipient for test report'
+        required: true
+        default: your-team@email.com
+        type: string
 
 jobs:
   api-tests:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout code
+      # =========================
+      # SETUP
+      # =========================
+      - name: Checkout source code
         uses: actions/checkout@v4
 
-      - name: Set up Java
+      - name: Set up Java 11
         uses: actions/setup-java@v4
         with:
-          distribution: 'temurin'
-          java-version: '17'
+          distribution: temurin
+          java-version: '11'
 
-      - name: Run API tests
-        run: mvn clean test -Denv=dev
+      - name: Cache Maven dependencies
+        uses: actions/cache@v4
+        with:
+          path: ~/.m2
+          key: maven-${{ runner.os }}-${{ hashFiles('**/pom.xml') }}
+          restore-keys: |
+            maven-${{ runner.os }}
 
+      # =========================
+      # EXECUTION
+      # =========================
+      - name: Run API Automation Tests
+        run: |
+          echo "Running tests on environment: ${{ inputs.environment }}"
+          mvn clean test -Denv=${{ inputs.environment }}
+
+      # =========================
+      # REPORT
+      # =========================
       - name: Generate Allure Report
+        if: always()
         run: mvn allure:report
 
       - name: Upload Allure Report
+        if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: allure-report
+          name: allure-report-${{ inputs.environment }}
           path: target/site/allure-maven-plugin
+
+      # =========================
+      # EMAIL NOTIFICATION
+      # =========================
+      - name: Send email with report
+        if: always()
+        uses: dawidd6/action-send-mail@v3
+        with:
+          server_address: smtp.gmail.com
+          server_port: 587
+          username: ${{ secrets.EMAIL_USERNAME }}
+          password: ${{ secrets.EMAIL_PASSWORD }}
+          subject: |
+            API Automation Test Result - ${{ inputs.environment }}
+          body: |
+            Hello Team,
+
+            API Automation tests have completed.
+
+            Environment: ${{ inputs.environment }}
+            Repository: ${{ github.repository }}
+
+            Run URL:
+            ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+
+            Please download the Allure report from the workflow artifacts.
+
+            Regards,
+            QA Automation
+          to: ${{ inputs.email_to }}
+          from: QA Automation <${{ secrets.EMAIL_USERNAME }}>
